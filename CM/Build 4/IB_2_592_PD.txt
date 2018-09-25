@@ -1,6 +1,7 @@
-VistA Patch Display                                                   Page: 1
+DEVICE: HOME// ;80;9999999999999  SSH VIRTUAL TERMINAL
+VistA Patch Display                                                   Page: 1
 =============================================================================
-Run Date: DEC 18, 2017                      Designation: IB*2*592  TEST v10
+Run Date: SEP 19, 2018                      Designation: IB*2*592  TEST v20
 Package : INTEGRATED BILLING                Priority   : MANDATORY
 Version : 2                                 Status     : UNDER DEVELOPMENT
 =============================================================================
@@ -12,8 +13,14 @@ Associated patches: (v)IB*2*81     <<= must be installed BEFORE `IB*2*592'
                     (v)IB*2*492    <<= must be installed BEFORE `IB*2*592'
                     (v)IB*2*517    <<= must be installed BEFORE `IB*2*592'
                     (v)IB*2*530    <<= must be installed BEFORE `IB*2*592'
+                    (v)IB*2*568    <<= must be installed BEFORE `IB*2*592'
                     (v)IB*2*574    <<= must be installed BEFORE `IB*2*592'
                     (v)IB*2*577    <<= must be installed BEFORE `IB*2*592'
+                    (v)IB*2*591    <<= must be installed BEFORE `IB*2*592'
+                    (v)IB*2*597    <<= must be installed BEFORE `IB*2*592'
+                    (v)IB*2*601    <<= must be installed BEFORE `IB*2*592'
+                    (v)IB*2*604    <<= must be installed BEFORE `IB*2*592'
+                    (v)IB*2*616    <<= must be installed BEFORE `IB*2*592'
                     
 
 Subject:  MCCF EDI TAS EBILLING BUILD 3/4 DENTAL
@@ -121,7 +128,8 @@ IB FORM SKELETON DEFINITION (#364.6)                      New/Modified
      Screen: I $$INCLUDE^IBY592PR(6,Y)                     Entries
 IB FORM FIELD CONTENT (#364.7)                            New/Modified
      Screen: I $$INCLUDE^IBY592PR(7,Y)                     Entries
-BILL/CLAIMS (#399)                                        
+BILL/CLAIMS (#399)                                       
+                      FORM TYPE (#.19)                    Modified
                       BANDING DATE (#92)                  New
                       TREATMENT MONTHS COUNT (#93)        New
                       TREATMENT MONTHS REMAINING (#94)    New
@@ -163,6 +171,7 @@ BILL/CLAIMS (#399)
                       TOOTH SURFACE (3) (#.04)            New
                       TOOTH SURFACE (4) (#.05)            New
                       TOOTH SURFACE (5) (#.06)            New
+                      DENTAL TREATMENT PLAN ENTRY (#.07)  New 
  
 Bulletins Associated:
                                                           New/Modified/
@@ -319,6 +328,7 @@ Template Name      Type                                     Deleted
 -------------      ----                                   -------------
 IBCE INSCO ID      List                                   Modified 
 MAINT                                                    
+IBCE PRVPRV MAINT  List                                   Modified
 IBCE VIEW PREV     List                                   Modified 
 TRANS1                                                    
 IBCE VIEW PREV     List                                   Modified 
@@ -460,9 +470,8 @@ The Post-install routine (IBY592PO) will automatically do the following:
  *     Add new entries to TYPE OF SERVICE (#353.2) file
  *     Add new entry to IB ATTACHMENT REPORT TYPE (#353.3) file 
  *     Recompile the Input Templates for the billing screens
- *     Set default processing of dental claims to YES - IB SITE 
-PARAMETERS (#350.9) File,
-DENTAL ENABLED? (#8.2) Field.
+ *     Set default processing of dental claims to YES - IB SITE
+       PARAMETERS (#350.9) File, DENTAL ENABLED? (#8.2) Field.
     
 Routines IBY592PO and IBY592PR may be manually deleted by upon completion
 of the installation.
@@ -522,7 +531,7 @@ Routine Information:
 
 
 The second line of each of these routines now looks like:
- ;;2.0;INTEGRATED BILLING;**[Patch List]**;21-MAR-94;Build 28
+ ;;2.0;INTEGRATED BILLING;**[Patch List]**;21-MAR-94;Build 58
 
 The checksums below are new checksums, and
  can be checked with CHECK1^XTSUMBLD.
@@ -535,7 +544,7 @@ Routine Name: IBCB1
 Routine Name: IBCB2
     Before: B52688677   After: B53477183  **52,51,161,182,155,447,592**
 Routine Name: IBCBB
-    Before: B79149601   After: B82571312  **80,51,137,288,327,361,371,
+    Before: B79149601   After: B85882091  **80,51,137,288,327,361,371,
                                            377,400,432,461,547,592**
 Routine Name: IBCBB1
     Before:B125745915   After:B127796820  **27,52,80,93,106,51,151,148,
@@ -543,34 +552,44 @@ Routine Name: IBCBB1
                                            349,363,371,395,384,432,447,
                                            488,554,577,592**
 Routine Name: IBCBB11
-    Before:B112052327   After:B125858944  **51,343,363,371,395,392,401,
+    Before:B104877597   After:B117506484  **51,343,363,371,395,392,401,
                                            384,400,436,432,516,550,577,
-                                           592**
+                                           568,591,592**
 Routine Name: IBCBB12
     Before:B132831016   After:B136258580  **432,592**
+Routine Name: IBCBB14
+    Before:  B5240660   After:  B4923293  **591,592**
 Routine Name: IBCBB3
     Before: B41965627   After: B41940639  **51,137,155,349,371,377,432,592**
 Routine Name: IBCC
-    Before: B65758578   After: B66766074  **2,19,77,80,51,142,137,161,
+    Before: B75296271   After: B76370923  **2,19,77,80,51,142,137,161,
                                            199,241,155,276,320,358,433,
-                                           432,447,516,547,592**
+                                           432,447,516,547,597,592**
 Routine Name: IBCCC
     Before: B22970985   After: B24472869  **80,109,106,51,320,433,432,
                                            447,516,592**
 Routine Name: IBCCC2
-    Before:B116481460   After:B127129457  **80,106,124,138,51,151,137,
+    Before:B116481460   After:B130398035  **80,106,124,138,51,151,137,
                                            161,182,211,245,155,296,320,
                                            348,349,371,400,433,432,447,
                                            516,577,592**
 Routine Name: IBCCCB
     Before: B69153739   After: B69998432  **80,106,51,151,137,182,155,
                                            323,436,432,447,547,592**
+Routine Name: IBCCPT
+    Before: B86719137   After:B156624726  **55,62,52,91,106,125,51,148,
+                                           174,182,245,266,260,339,432,
+                                           592**
 Routine Name: IBCD
     Before:  B9905224   After: B12137140  **312,554,592**
 Routine Name: IBCD1
     Before: B14183697   After: B14329608  **55,81,592**
 Routine Name: IBCD2
     Before: B27978767   After: B29470256  **4,55,91,106,384,458,592**
+Routine Name: IBCD3
+    Before: B34628725   After: B86658551  **14,55,52,91,106,125,51,148,
+                                           160,137,210,245,260,405,384,
+                                           516,522,592**
 Routine Name: IBCE837
     Before: B86551026   After: B88399984  **137,191,197,232,296,349,547,592**
 Routine Name: IBCE837A
@@ -640,13 +659,16 @@ Routine Name: IBCEFP
 Routine Name: IBCEM03
     Before: B45643062   After: B46770743  **137,199,296,348,349,592**
 Routine Name: IBCEMQA
-    Before: B15212408   After: B15405374  **155,432,592**
+    Before: B15212408   After: B15379680  **155,432,592**
 Routine Name: IBCEMU4
     Before: B29651910   After: B31295284  **288,432,447,592**
+Routine Name: IBCEOB1
+    Before:B106424337   After:B108553745  **137,135,155,296,356,349,431,
+                                           488,597,592**
 Routine Name: IBCEP
-    Before: B21937532   After: B22960044  **137,232,320,348,349,592**
+    Before: B21937532   After: B21911838  **137,232,320,348,349,592**
 Routine Name: IBCEP0
-    Before: B72988183   After: B73459883  **137,191,239,232,320,348,349,
+    Before: B72988183   After: B73482476  **137,191,239,232,320,348,349,
                                            377,592**
 Routine Name: IBCEP2
     Before: B54308373   After: B56529632  **137,181,232,280,320,349,432,592**
@@ -657,13 +679,13 @@ Routine Name: IBCEP2B
 Routine Name: IBCEP3
     Before: B36442740   After: B37284126  **137,207,232,280,349,592**
 Routine Name: IBCEP4
-    Before: B23601105   After: B26740866  **137,320,348,349,377,592**
+    Before: B23601105   After: B23569043  **137,320,348,349,377,592**
 Routine Name: IBCEP5
     Before: B48717212   After: B59355056  **137,232,320,348,349,377,592**
 Routine Name: IBCEP5A
     Before: B26443385   After: B26669569  **137,232,320,348,447,592**
 Routine Name: IBCEP5B
-    Before: B41204243   After: B41531314  **137,239,232,320,348,349,592**
+    Before: B41204243   After: B41537754  **137,239,232,320,348,349,592**
 Routine Name: IBCEP5C
     Before: B44199946   After: B44174252  **137,239,232,320,348,349,592**
 Routine Name: IBCEP5D
@@ -673,7 +695,7 @@ Routine Name: IBCEP7
 Routine Name: IBCEP7B
     Before:  B7401780   After:  B7363951  **320,348,349,592**
 Routine Name: IBCEP7C
-    Before: B59638074   After: B59441823  **137,232,320,348,349,592**
+    Before: B59638074   After: B59082632  **137,232,320,348,349,592**
 Routine Name: IBCEP8A
     Before: B25658990   After: B27427687  **320,349,592**
 Routine Name: IBCEP9
@@ -715,12 +737,12 @@ Routine Name: IBCEU7
 Routine Name: IBCEXTRP
     Before: B44709750   After: B50603879  **137,197,211,348,349,377,592**
 Routine Name: IBCF23
-    Before: B49750471   After: B55110421  **52,80,106,122,51,152,137,402,
+    Before: B49750471   After: B55703345  **52,80,106,122,51,152,137,402,
                                            432,488,547,592**
 Routine Name: IBCF23A
-    Before: B39049121   After: B50246152  **51,432,516,547,577,592**
+    Before: B39049121   After: B50374642  **51,432,516,547,577,592**
 Routine Name: IBCNADD
-    Before:  B6555779   After:  B7552650  **52,80,377,592**
+    Before:  B6555779   After:  B7526956  **52,80,377,592**
 Routine Name: IBCNSC
     Before: B36416057   After: B48955392  **46,137,184,276,320,371,400,
                                            488,547,592**
@@ -741,13 +763,18 @@ Routine Name: IBCNSCD2
     Before: B19727766   After: B20190292  **28,46,592**
 Routine Name: IBCNSI
     Before:       n/a   After:  B8158592  **592**
+Routine Name: IBCNSU3
+    Before:  B4463895   After:  B5742335  **43,80,592**
 Routine Name: IBCSC10
     Before:  B8993520   After:  B9372507  **432,547,574,592**
 Routine Name: IBCSC10H
-    Before: B51814065   After: B73421967  **432,488,547,592**
+    Before: B51814065   After: B81208803  **432,488,547,592**
 Routine Name: IBCSC3
     Before: B37464352   After: B37966434  **8,43,52,80,82,51,137,232,320,
                                            377,516,592**
+Routine Name: IBCSC4
+    Before: B25534082   After: B25978379  **52,51,210,245,155,287,349,
+                                           403,400,461,592**
 Routine Name: IBCSC5
     Before: B17240137   After: B18258381  **52,125,51,210,266,288,287,
                                            309,389,447,461,592**
@@ -773,13 +800,13 @@ Routine Name: IBCU3
 Routine Name: IBCU41
     Before: B20490138   After: B23281975  **80,106,51,294,592**
 Routine Name: IBCU7
-    Before:B116490042   After:B159022850  **62,52,106,125,51,137,210,245,
+    Before:B134090555   After:B175831153  **62,52,106,125,51,137,210,245,
                                            228,260,348,371,432,447,488,
-                                           461,516,522,577,592**
+                                           461,516,522,577,592,604,616**
 Routine Name: IBCU72
-    Before: B16208907   After: B91967650  **62,210,473,461,492,592**
+    Before: B16208907   After: B93126486  **62,210,473,461,592**
 Routine Name: IBCU7B
-    Before: B55412712   After: B62886159  **432,447,592**
+    Before: B55412712   After: B63616995  **432,447,592**
 Routine Name: IBCU82
     Before: B22371343   After: B24704444  **43,55,91,124,160,304,347,432,592**
 Routine Name: IBCU9
@@ -799,21 +826,21 @@ Routine Name: IBJTCA1
                                            384,432,452,473,497,521,516,
                                            592**
 Routine Name: IBJTLA1
-    Before: B12051503   After: B12566778  **39,80,61,51,153,137,183,276,
-                                           451,516,530,592**
+    Before: B13446872   After: B14092022  **39,80,61,51,153,137,183,276,
+                                           451,516,530,568,592**
 Routine Name: IBJTLB1
-    Before: B12752963   After: B13922101  **39,80,61,137,276,451,516,530,592**
+    Before: B13573050   After: B14819711  **39,80,61,137,276,451,516,530,
+                                           568,592**
 Routine Name: IBJTU3
     Before:  B9494188   After: B11140228  **39,80,592**
 Routine Name: IBTRH5D
     Before:B177666961   After:B177109854  **517,592**
 Routine Name: IBY592PO
-    Before:       n/a   After: B28618962  **592**
+    Before:       n/a   After: B30143818  **592**
 Routine Name: IBY592PR
     Before:       n/a   After: B28375720  **592**
  
-Routine list of preceding patches: 81, 294, 405, 458, 492, 517, 530, 574
-                           577
+Routine list of preceding patches: 81, 294, 458, 517, 574, 591, 597, 616
 
 
 =============================================================================
@@ -822,3 +849,5 @@ User Information:
   Completed By:                        Date Completed:   
   Released By :                        Date Released :   
 =============================================================================
+
+
