@@ -1,7 +1,7 @@
-DEVICE: HOME// ;80;9999999999999  SSH VIRTUAL TERMINAL
+DEVICE: HOME// ;80;999999  SSH VIRTUAL TERMINAL
 VistA Patch Display                                                   Page: 1
 =============================================================================
-Run Date: SEP 19, 2018                      Designation: IB*2*592  TEST v20
+Run Date: SEP 26, 2018                      Designation: IB*2*592  TEST v20
 Package : INTEGRATED BILLING                Priority   : MANDATORY
 Version : 2                                 Status     : UNDER DEVELOPMENT
 =============================================================================
@@ -482,6 +482,19 @@ Installation Instructions
 This patch may be installed with users on the system however it is 
 highly recommended that it be installed during non-peak hours to minimize
 potential disruption to users.  
+ 
+**NOTE TO INSTALLER**
+Line 2 of routine IBCU7 incorrectly lists the patch release order as: 
+ 
+**62,52,106,125,51,137,210,245,228,260,348,371,432,447,488,461,516,522,577
+,592,604,616**   
+ 
+when it should be:
+ 
+**62,52,106,125,51,137,210,245,228,260,348,371,432,447,488,461,516,522,577
+,604,616,592**   
+ 
+This has NO IMPACT on functionality and will be corrected in IB*2.0*608.
  
 This patch should take less than 10 minutes to install.
  
