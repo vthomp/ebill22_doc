@@ -1,14 +1,14 @@
 VistA Patch Display                                                   Page: 1
 =============================================================================
-Run Date: JUN 05, 2018                      Designation: IB*2*608  TEST v31
+Run Date: OCT 18, 2018                      Designation: IB*2*608  TEST v33
 Package : INTEGRATED BILLING                Priority   : MANDATORY
 Version : 2                                 Status     : UNDER DEVELOPMENT
 =============================================================================
 
-Associated patches: (u)IB*2*592    <<= must be installed BEFORE `IB*2*608'
+Associated patches: (v)IB*2*592    <<= must be installed BEFORE `IB*2*608'
                     
 
-Subject:  MCCF EDI TAS EBILLING BUILD 5/6 CMN
+Subject:  MCCF EDI TAS EBILLING BUILD 5/6
 
 Category:  DATA DICTIONARY
            INPUT TEMPLATE
@@ -25,17 +25,6 @@ electronic format to third-party payers.
  
 The following features of the IB software will be affected by this 
 patch:
- 
-   * CMN Oxygen and EPN Nutrition
- 
-     The IB VistA package has been modified to enable the "Enter/Edit
-     Billing Information" [IB EDIT BILLING INFO] option to enter the
-     required data for an Oxygen Certificate of Medical Necessity (CMN)
-     (CMS-484.3) or an Enteral and Parenteral Nutrition CMN (CMS-10126)
-     when completing a professional bill for Durable Medical Equipment
-     (DME). In addition, the ability to transmit Professional claims has
-     been modified to include the CMN data in the proprietary 837-P
-     Transaction to the Financial Services Center (FSC).
  
    * Transmitting SNF Claims with Appropriate Revenue Codes
  
@@ -148,6 +137,16 @@ patch:
      Claim does not contain a Rendering Provider.
  
  
+   * CMN Oxygen and EPN Nutrition
+ 
+     The IB VistA package has been modified to enable the "Enter/Edit
+     Billing Information" [IB EDIT BILLING INFO] option to enter the
+     required data for an Oxygen Certificate of Medical Necessity (CMN)
+     (CMS-484.3) or an Enteral and Parenteral Nutrition CMN (CMS-10126)
+     when completing a professional bill for Durable Medical Equipment
+     (DME). In addition, the ability to transmit Professional claims has
+     been modified to include the CMN data in the proprietary 837-P
+     Transaction to the Financial Services Center (FSC).
  
 Patch Components
 ================
@@ -222,7 +221,8 @@ BILL/CLAIMS (#399)                                        Modified
                         (#24.201) 
                       CMN ENTERAL NUTRITION BY TUBE?      New
                         (#24.202) 
-                      CMN PROCEDURE CALORIES (#24.203)    New
+                      CMN PROCEDURE A CALORIES (#24.203)    New
+                      CMN PROCEDURE A (#24.204)           New
                       CMN METHOD OF ADMINISTRATION        New
                         (#24.205) 
                       CMN DAYS PER WEEK ADMINISTERED      New
@@ -246,7 +246,7 @@ BILL/CLAIMS (#399)                                        Modified
                         (#24.217) 
                       CMN PROCEDURE B CALORIES (#24.218)  New
                       CMN PROCEDURE B (#24.219)           New
-                      CMN FORM TYPES (#399.6)             New
+CMN FORM TYPES (#399.6)                                   New
  
  
 Bulletins Associated:
@@ -469,6 +469,11 @@ Patch Installation:
 Pre/Post Installation Overview
 ------------------------------
  
+Of note, included in this patch is a modification to line 2 in the routine
+IBCU7 to correct the patch sequencing that was entered as part of the
+IB*2.0*592 patch.  This change has no effect on the functionality of the
+routine and was only made to correct the patch sequencing of line 2.
+ 
 *************************************************************************
 *                          IMPORTANT NOTE                               *
 *  In PRODUCTION, there is one **MANDATORY** pre-installation activity  *
@@ -591,75 +596,76 @@ Routine Information:
 
 
 The second line of each of these routines now looks like:
- ;;2.0;INTEGRATED BILLING;**[Patch List]**;21-MAR-94;Build 69
+ ;;2.0;INTEGRATED BILLING;**[Patch List]**;21-MAR-94;Build 77
 
 The checksums below are new checksums, and
  can be checked with CHECK1^XTSUMBLD.
 
 Routine Name: IBCBB1
-    Before:B125745915   After:B130250613  **27,52,80,93,106,51,151,148,
+    Before:B127796820   After:B130250613  **27,52,80,93,106,51,151,148,
                                            153,137,232,280,155,320,343,
                                            349,363,371,395,384,432,447,
                                            488,554,577,592,608**
 Routine Name: IBCBB12
-    Before:B132831016   After:B140177880  **432,592,608**
+    Before:B136258580   After:B140177880  **432,592,608**
 Routine Name: IBCBB13
-    Before: B19726855   After: B50362513  **447,608**
+    Before: B19726855   After: B52019184  **447,608**
 Routine Name: IBCCC2
-    Before:B116481460   After:B135912678  **80,106,124,138,51,151,137,
+    Before:B130398035   After:B139322972  **80,106,124,138,51,151,137,
                                            161,182,211,245,155,296,320,
                                            348,349,371,400,433,432,447,
                                            516,577,592,608**
 Routine Name: IBCE837B
-    Before:  B3184659   After:  B4155591  **137,191,197,320,608**
+    Before:  B3184659   After:  B4349124  **137,191,197,320,608**
 Routine Name: IBCEF11
-    Before: B86419290   After:B100824598  **51,137,155,309,335,348,349,
+    Before: B92999922   After:B100824598  **51,137,155,309,335,348,349,
                                            371,432,447,473,516,577,592,
                                            608**
 Routine Name: IBCEF2
-    Before: B78152141   After:B137959785  **52,85,51,137,232,155,296,349,
+    Before: B81532163   After:B138189559  **52,85,51,137,232,155,296,349,
                                            403,400,432,488,461,547,592,
                                            608**
 Routine Name: IBCEF22
-    Before: B97383500   After:B106225486  **51,137,135,155,309,349,389,
+    Before: B97383500   After:B105689310  **51,137,135,155,309,349,389,
                                            432,488,516,577,608**
 Routine Name: IBCEF31
-    Before: B14588723   After: B67737548  **155,296,349,400,432,488,516,
+    Before: B15832177   After: B67968602  **155,296,349,400,432,488,516,
                                            592,608**
 Routine Name: IBCEFG7
-    Before: B51790981   After: B54095701  **52,84,96,51,137,191,320,608**
+    Before: B51790981   After: B54668730  **52,84,96,51,137,191,320,608**
 Routine Name: IBCEPTC2
-    Before: B52666304   After: B56837195  **296,320,348,349,547,592,608**
+    Before: B53543437   After: B56837195  **296,320,348,349,547,592,608**
 Routine Name: IBCEPTC3
     Before: B64803891   After: B91463160  **320,547,608**
 Routine Name: IBCEU
-    Before:B105674829   After:B119764859  **51,137,207,232,349,432,592,608**
+    Before:B116893464   After:B119764859  **51,137,207,232,349,432,592,608**
 Routine Name: IBCEU1
     Before: B91847621   After:B117180629  **137,155,296,349,371,432,473,
                                            547,608**
 Routine Name: IBCEU3
-    Before:B106673839   After:B109583745  **51,137,155,323,348,371,400,
+    Before:B109051815   After:B109583745  **51,137,155,323,348,371,400,
                                            432,488,519,592,608**
 Routine Name: IBCEU5
-    Before: B79445173   After: B88004916  **51,137,232,348,349,432,592,608**
+    Before: B88027546   After: B88004916  **51,137,232,348,349,432,592,608**
 Routine Name: IBCF23A
-    Before: B39049121   After: B52423011  **51,432,516,547,577,592,608**
+    Before: B50374642   After: B52551501  **51,432,516,547,577,592,608**
 Routine Name: IBCNSC01
-    Before: B73912803   After: B76348341  **52,137,191,184,232,320,349,
+    Before: B75281286   After: B76348341  **52,137,191,184,232,320,349,
                                            371,399,416,432,494,519,547,
                                            592,608**
 Routine Name: IBCU7
-    Before:B132964294   After:B180670988  **62,52,106,125,51,137,210,245,
+    Before:B175831153   After:B180096059  **62,52,106,125,51,137,210,245,
                                            228,260,348,371,432,447,488,
-                                           461,516,522,577,604,592,608**
+                                           461,516,522,577,604,616,592,
+                                           608**
 Routine Name: IBCU75
-    Before:       n/a   After: B79237139  **608**
+    Before:       n/a   After: B79458011  **608**
 Routine Name: IBJPS
-    Before:  B6490988   After:  B6807999  **39,52,70,115,143,51,137,161,
+    Before:  B6552900   After:  B6807999  **39,52,70,115,143,51,137,161,
                                            155,320,348,349,377,384,400,
                                            432,494,461,516,547,592,608**
 Routine Name: IBJPS2
-    Before: B54853458   After: B59492878  **39,52,115,143,51,137,161,155,
+    Before: B56657157   After: B59492878  **39,52,115,143,51,137,161,155,
                                            320,348,349,377,384,400,432,
                                            494,461,516,547,592,608**
 Routine Name: IBJPS3
@@ -669,9 +675,9 @@ Routine Name: IBJPS4
 Routine Name: IBJPS7
     Before:       n/a   After: B13118039  **608**
 Routine Name: IBJPS8
-    Before:       n/a   After:  B9857152  **608**
+    Before:       n/a   After:  B8772675  **608**
 Routine Name: IBTUBO
-    Before: B47033794   After: B67234312  **19,31,32,91,123,159,192,235,
+    Before: B47033794   After: B73411943  **19,31,32,91,123,159,192,235,
                                            248,155,516,547,608**
 Routine Name: IBTUBO3
     Before: B42226483   After: B45102914  **123,159,192,155,277,516,547,608**
@@ -679,7 +685,7 @@ Routine Name: IBTUBOA
     Before: B37900623   After: B56520031  **19,31,32,91,123,159,192,155,
                                            276,516,608**
 Routine Name: IBTUBOU
-    Before: B38728907   After: B44405031  **123,159,155,608**
+    Before: B38728907   After: B42355876  **123,159,155,608**
 Routine Name: IBTUBUL
     Before: B60799593   After: B63490597  **19,123,159,217,155,356,516,
                                            547,608**
@@ -697,3 +703,4 @@ User Information:
   Completed By:                        Date Completed:   
   Released By :                        Date Released :   
 =============================================================================
+
