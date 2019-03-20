@@ -1,11 +1,13 @@
-VistA Patch Display                                                   Page: 1
+  SSH VIRTUAL TERMINAL
+VistA Patch Display                                                   Page: 1
 =============================================================================
-Run Date: OCT 18, 2018                      Designation: IB*2*608  TEST v33
+Run Date: MAR 18, 2019                      Designation: IB*2*608  TEST v36
 Package : INTEGRATED BILLING                Priority   : MANDATORY
 Version : 2                                 Status     : UNDER DEVELOPMENT
 =============================================================================
 
 Associated patches: (v)IB*2*592    <<= must be installed BEFORE `IB*2*608'
+                    (v)IB*2*621    <<= must be installed BEFORE `IB*2*608'
                     
 
 Subject:  MCCF EDI TAS EBILLING BUILD 5/6
@@ -425,12 +427,30 @@ N/A
  
 Defect Tracking System Ticket(s) & Overview
 -------------------------------------------
-N/A
+ 
+1. INC4006791 - The option to add a Dental Payer ID and address in the
+Insurance Company Editor is missing. This is a VA wide issue.
+ 
+Problem:
+-------
+The option to add a Dental Payer ID and address in the Insurance Company 
+Entry/Edit [IBCN INSURANCE CO EDIT] is missing. This is a VA wide issue.
+ 
+Resolution:
+----------          
+Insurance Company Entry/Edit [IBCN INSURANCE CO EDIT] which
+was emhanced in IB*2.0*592 to support the addition of electronic 
+dental claims, EDI X12 837D, was overwritten in error in a subsequent
+patch and is being restored in order to prompt users for Dental Payer ID 
+and address.
  
  
 Test Sites:
 ----------
-TBD
+Dublin
+Martinsburg
+Orlando
+Tomah
  
 Documentation Retrieval Instructions
 ------------------------------------ 
@@ -445,14 +465,13 @@ Sites may retrieve the documentation directly using Secure File Transfer
 Protocol (SFTP) from the ANONYMOUS.SOFTWARE directory at the following OI
 Field Offices:
  
-   Albany:                 fo-albany.med.va.gov
    Hines:                  fo-hines.med.va.gov    
    Salt Lake City:         fo-slc.med.va.gov
  
 Documentation can also be found on the VA Software Documentation Library 
 at:  
  
-http://www.va.gov/vdl/
+https://www.va.gov/vdl/
  
 Title                         File Name                       FTP Mode
 -----------------------------------------------------------------------
@@ -596,7 +615,7 @@ Routine Information:
 
 
 The second line of each of these routines now looks like:
- ;;2.0;INTEGRATED BILLING;**[Patch List]**;21-MAR-94;Build 77
+ ;;2.0;INTEGRATED BILLING;**[Patch List]**;21-MAR-94;Build 90
 
 The checksums below are new checksums, and
  can be checked with CHECK1^XTSUMBLD.
@@ -622,11 +641,11 @@ Routine Name: IBCEF11
                                            371,432,447,473,516,577,592,
                                            608**
 Routine Name: IBCEF2
-    Before: B81532163   After:B138189559  **52,85,51,137,232,155,296,349,
+    Before: B81532163   After:B140185497  **52,85,51,137,232,155,296,349,
                                            403,400,432,488,461,547,592,
                                            608**
 Routine Name: IBCEF22
-    Before: B97383500   After:B105689310  **51,137,135,155,309,349,389,
+    Before: B97383500   After:B107716996  **51,137,135,155,309,349,389,
                                            432,488,516,577,608**
 Routine Name: IBCEF31
     Before: B15832177   After: B67968602  **155,296,349,400,432,488,516,
@@ -677,7 +696,7 @@ Routine Name: IBJPS7
 Routine Name: IBJPS8
     Before:       n/a   After:  B8772675  **608**
 Routine Name: IBTUBO
-    Before: B47033794   After: B73411943  **19,31,32,91,123,159,192,235,
+    Before: B47033794   After: B73456123  **19,31,32,91,123,159,192,235,
                                            248,155,516,547,608**
 Routine Name: IBTUBO3
     Before: B42226483   After: B45102914  **123,159,192,155,277,516,547,608**
@@ -690,7 +709,7 @@ Routine Name: IBTUBUL
     Before: B60799593   After: B63490597  **19,123,159,217,155,356,516,
                                            547,608**
 Routine Name: IBY608PO
-    Before:       n/a   After: B25787033  **608**
+    Before:       n/a   After: B25506190  **608**
 Routine Name: IBY608PR
     Before:       n/a   After: B11561553  **608**
  
@@ -703,4 +722,5 @@ User Information:
   Completed By:                        Date Completed:   
   Released By :                        Date Released :   
 =============================================================================
+
 
