@@ -1,7 +1,9 @@
-DEVICE: HOME// ;80;99999  SSH VIRTUAL TERMINAL
+Select PATCH:    IB*2*623  MCCF EDI TAS EBILLING BUILD 7/8/9 837 PORT   UND WCJ
+
+DEVICE: HOME// ;80;9999999999999999  SSH VIRTUAL TERMINAL
 VistA Patch Display                                                   Page: 1
 =============================================================================
-Run Date: APR 30, 2019                      Designation: IB*2*623  TEST v21
+Run Date: MAY 06, 2019                      Designation: IB*2*623  TEST v21
 Package : INTEGRATED BILLING                Priority   : MANDATORY
 Version : 2                                 Status     : UNDER DEVELOPMENT
 =============================================================================
@@ -161,7 +163,7 @@ patch:
      The VistA software has been modified to implement ROI
      changes so that the software is compliant with the
      Mission Act requirements.  To be compliant, the software has been
-     modified in the following ways if the claim's Date of Services is
+     modified in the following ways if the claim's Date of Service is
      on or after "01/28/2019":
  
      o  Will not prompt for the ROI form for a sensitive record.
