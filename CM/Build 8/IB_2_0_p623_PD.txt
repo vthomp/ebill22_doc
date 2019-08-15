@@ -1,9 +1,7 @@
-Select PATCH:    IB*2*623  MCCF EDI TAS EBILLING BUILD 7/8/9 837 PORT   UND WCJ
-
-DEVICE: HOME// ;80;9999999999999999  SSH VIRTUAL TERMINAL
+DEVICE: HOME// ;80;9999999  SSH VIRTUAL TERMINAL
 VistA Patch Display                                                   Page: 1
 =============================================================================
-Run Date: MAY 06, 2019                      Designation: IB*2*623  TEST v21
+Run Date: AUG 15, 2019                      Designation: IB*2*623  TEST v23
 Package : INTEGRATED BILLING                Priority   : MANDATORY
 Version : 2                                 Status     : UNDER DEVELOPMENT
 =============================================================================
@@ -11,7 +9,7 @@ Version : 2                                 Status     : UNDER DEVELOPMENT
 Associated patches: (v)IB*2*608    <<= must be installed BEFORE `IB*2*623'
                     
 
-Subject:  MCCF EDI TAS EBILLING BUILD 7/8/9 837 PORT
+Subject:  MCCF EDI TAS EBILLING BUILD 7/8/9
 
 Category:  DATA DICTIONARY
            ROUTINE
@@ -21,19 +19,13 @@ Category:  DATA DICTIONARY
 Description:
 ===========
  
-Important Note: There are **MANDATORY** pre and post installation
-activities associated with this install.
+Important Note: There is a **MANDATORY** pre installation activity
+associated with this install.
  
 Before install:
  
-* Set up CONNECTOR PROXY through FOUNDATIONS MANAGEMENT [XOBU SITE SETUP
-  MENU].
 * Integrated Billing (IB) Staff MUST empty the 837 extract/transmission
   queue PRIOR to the installation of this patch.
- 
-After install:
-* Start the Vistalink listener through FOUNDATIONS MANAGEMENT [XOBU SITE
-  SETUP MENU].                                                   
  
 Please reference instructions from the Pre/Post Installation Overview for
 further details. 
@@ -53,10 +45,10 @@ patch:
      INST (#3.04) field and EDI ID NUMBER - PROF (#3.02) field in addition
      to Claim Office ID Qualifier and Claim Office ID number in the
      secondary ID fields : EDI INST SECONDARY ID QUAL(1) (#6.01), EDI INST
-     SECONDARY ID(1) (#6.02, ), EDI INST SECONDARY ID QUAL(2) (#6.03), EDI
+     SECONDARY ID(1) (#6.02), EDI INST SECONDARY ID QUAL(2) (#6.03), EDI
      INST SECONDARY ID(2) (#6.04), EDI PROF SECONDARY ID QUAL(1) (#6.05),
      EDI PROF SECONDARY ID(1) (#6.06), EDI PROF SECONDARY ID QUAL(2)
-     (#6.07), EDI PROF SECONDARY ID(2)(#6.08) fields . When there is no
+     (#6.07), EDI PROF SECONDARY ID(2)(#6.08) fields. When there is no
      Secondary Professional or Institutional Payer ID defined in VistA and
      a claim(s) is transmitted to the payer(s) and the Health Care
      Clearing House (HCCH) has an electronic agreement with the payer(s),
@@ -100,34 +92,6 @@ patch:
      The IB software has been modified to submit a secondary claim
      (that contains an alternate payer ID) to the secondary payer using 
      the alternate payer ID, not the payer's primary Payer ID.
- 
-   * Transmit 837 Transactions Through New Platform
- 
-     The following modifications have been made to the transmission
-     process of the 837 transaction using the new Transaction Application
-     System (TAS) technology platform:
- 
-     o  A new question has been added to the MCCR Site Parameter
-        Display/Edit [IBJ MCCR SITE PARAMETERS] option, ' Enable 837 FHIR
-        Transaction?'.  This allows the system to switch between the two
-        methods, which is most beneficial during development, Unit
-        Testing, CIT, and UAT.  This will be set to NO upon installation.
- 
-     o  Propriety Health Care Claim: Professional, Institutional,
-        Dental transactions can be created and transmitted to FSC at
-        the times designated in the IB Site Parameters.
- 
-     o  eBilling personnel can retain the existing ability to
-        transmit one or more Health Care Claim: Professional,
-        Institutional, Dental transactions outside the designated
-        transmission time (On Demand).
- 
-     o  Propriety Health Care Claim: Professional, Institutional,
-        Dental transactions will be created using FHIR (Fast Healthcare
-        Interoperability Resources) and transmitted to FSC.
- 
-     o  The HL7 FHIR transaction data is available to the Integrated
-        Billing (IB) personnel via VistA.
  
  
    * CSA-Separate TRICARE/CHAMPVA
@@ -311,7 +275,7 @@ Remote Procedure Name                                       Deleted
 IBTAS 837 ACK                                             New
 IBTAS 837 CLAIM DATA                                      New 
 IBTAS 837 EDICLAIMS                                       New 
- 
+IBTAS HEALTH                                              New
  
 Security Keys Associated:
                                                           New/Modified/
@@ -416,77 +380,13 @@ Pre/Post Installation Overview
  
 *************************************************************************
 *                          IMPORTANT NOTE                               *
-*  There are **MANDATORY** pre and post installation activities         *
-*  associated with this install.                                        *
+*  There is a **MANDATORY** pre installation activity associated with   *
+*  this install.                                                        *
 *                                                                       *
-*  Prior to install                                                     *
-*  1) Set up CONNECTOR PROXY through FOUNDATIONS MANAGEMENT [XOBU SITE  *
-*   SETUP MENU].                                                        *
-*  2) Integrated Billing (IB) Staff MUST empty the 837                  *
-*  extract/transmission queue PRIOR to the installation of this patch.  *
-*                                                                       *
-*  After install                                                        *
-*  1) Start the Vistalink listener through FOUNDATIONS MANAGEMENT [XOBU *
-*  SITE SETUP MENU].                                                    *
+*  IB Staff MUST empty the 837 extract/transmission queue PRIOR to the  *
+*  installation of this patch.                                          *
 *                                                                       *
 *************************************************************************
- 
-HOW TO SET UP CONNECTOR PROXY USER THROUGH FOUNDATIONS:
-=======================================================
-First, the site Information Resource Management (IRM), ESL Enterprise 
-Service Line, or designated representative must contact William Jutzi 
-(William.Jutzi@va.gov), John Smith (John.Smith5@va.gov) or Jessica Ikley 
-(Jessica.Ikley@va.gov) to get the access/verify code for CONNECTOR PROXY 
-for your site.  This will be sent encrypted via outlook.
- 
-Using Vista Option FOUNDATIONS MANAGEMENT [XOBU SITE SETUP MENU]:
- 
-                    <<<      VistALink Parameters     >>>
- 
-    VistALink Version: 1.6    Heartbeat Rate: 180    Latency Delta: 180
- 
-                    <<< VistALink Listener Status Log >>>
-  ID  Box-Volume        Port   Status       Status Date/Time    
-Configuration   
- 
- 
- 
- 
- 
- Enter ?? for more actions
-SP  Site Parameters                     SL  Start Listener
-CFG Manage Configurations               STP Stop Listener
-CP  Enter/Edit Connector Proxy User     SB  Start Box
-RE  Refresh                             CU  Clean Up Log
-CM  Connection Manager
-Select Action:Quit//
- 
-Select Action:Quit// CP   Enter/Edit Connector Proxy User  
-Enter NPF CONNECTOR PROXY name : TAS,CONNECTOR PROXY
-  Are you adding TAS,CONNECTOR PROXY as a new NEW PERSON (the 198970TH)?
-No// Y (Yes)
-Checking SOUNDEX for matches.
- 
-. <different potential matches for each site>
- 
-Type <Enter> to continue or '^' to exit: ^
-Do you still want to add this entry: NO//Y
-Want to edit ACCESS CODE (Y/N): Y
-Enter a new ACCESS CODE <Hidden>: ***********  <Use ACCESS CODE provided 
-to your site) 
-Please re-type the new code to show that I have it right: ***********
-OK, Access code has been changed!
-The VERIFY CODE has been deleted as a security measure.
-You will need to enter a new VERIFY code so the user can sign-on.
- 
-Want to edit VERIFY CODE (Y/N): Y
- 
-Enter a new VERIFY CODE: ************  <Use VERIFY CODE provided to your 
-site>
- 
-Please re-type the new code to show that I have it right: ************
- 
- 
   
 HOW TO EMPTY THE 837 EXTRACT TRANSMISSION QUEUE:
 ===============================================================
@@ -521,9 +421,8 @@ this patch.
 ------------------------------------------------------------------------
    
 The Pre-install routine (IBY623PR) is used to screen claims output 
-formatter
-file entries included with the build and clear out any extraneous data 
-associated with the entries before installing them. 
+formatter file entries included with the build and clear out any
+extraneous data associated with the entries before installing them.
    
 The Post-install routine (IBY623PO) will automatically do the following:
  *     Add the "IBTAS,APPLICATION PROXY" user to the New Person file
@@ -546,40 +445,11 @@ The Post-install routine (IBY623PO) will automatically do the following:
        search.
  
 Both IBY623PR and IBY623PO routines may be manually deleted by IT/IRM upon
-completion of theinstallation.
+completion of the installation.
  
 Post-Installation instructions
 ------------------------------ 
- 
-Verify the listener is running at your site listener using Vista Option
-FOUNDATIONS MANAGEMENT [XOBU SITE SETUP MENU]:       
- 
-Start the listener using Vista Option FOUNDATIONS MANAGEMENT [XOBU SITE 
-SETUP MENU]:                  
- 
-                    <<<      VistALink Parameters     >>>
- 
-    VistALink Version: 1.6    Heartbeat Rate: 180    Latency Delta: 180
- 
-                    <<< VistALink Listener Status Log >>>
-  ID  Box-Volume        Port   Status       Status Date/Time    
-Configuration   
- 
- 
- 
- 
- 
-          Enter ?? for more actions
-SP  Site Parameters                     SL  Start Listener
-CFG Manage Configurations               STP Stop Listener
-CP  Enter/Edit Connector Proxy User     SB  Start Box
-RE  Refresh                             CU  Clean Up Log
-CM  Connection Manager
-Select Action:Quit// SL   Start Listener  
-Starting VistALink Listener...
-Enter Port: 8000// ####  <Enter agreed upon listener port for this 
-installation>
- 
+N/A
  
 Installation Instructions
 -------------------------
@@ -641,7 +511,7 @@ Routine Information:
 
 
 The second line of each of these routines now looks like:
- ;;2.0;INTEGRATED BILLING;**[Patch List]**;21-MAR-94;Build 53
+ ;;2.0;INTEGRATED BILLING;**[Patch List]**;21-MAR-94;Build 59
 
 The checksums below are new checksums, and
  can be checked with CHECK1^XTSUMBLD.
@@ -651,6 +521,9 @@ Routine Name: IBCB1
                                            327,432,592,623**
 Routine Name: IBCB2
     Before: B53477183   After: B55241475  **52,51,161,182,155,447,592,623**
+Routine Name: IBCBB
+    Before: B85882091   After:B105632554  **80,51,137,288,327,361,371,
+                                           377,400,432,461,547,592,623**
 Routine Name: IBCBB1
     Before:B130250613   After:B132843227  **27,52,80,93,106,51,151,148,
                                            153,137,232,280,155,320,343,
@@ -671,11 +544,11 @@ Routine Name: IBCE837
 Routine Name: IBCE837A
     Before: B52481474   After: B55171065  **137,191,211,232,296,377,592,623**
 Routine Name: IBCE837H
-    Before:       n/a   After:B209317298  **623**
+    Before:       n/a   After:B213562833  **623**
 Routine Name: IBCE837I
-    Before:       n/a   After: B20527868  **623**
+    Before:       n/a   After: B20501299  **623**
 Routine Name: IBCE837K
-    Before:       n/a   After:  B8542173  **623**
+    Before:       n/a   After:  B8563001  **623**
 Routine Name: IBCECSA
     Before: B60060653   After: B69575708  **137,320,623**
 Routine Name: IBCECSA1
@@ -689,12 +562,16 @@ Routine Name: IBCEF22
                                            432,488,516,577,608,623**
 Routine Name: IBCEF72
     Before: B59075267   After: B64748547  **232,320,349,432,516,592,623**
+Routine Name: IBCEFP
+    Before:B118488673   After:B119401920  **432,447,473,516,592,623**
 Routine Name: IBCEM03
     Before: B46770743   After: B48666797  **137,199,296,348,349,592,623**
+Routine Name: IBCEPTC
+    Before: B93542817   After: B95452309  **296,320,348,349,547,592,623**
 Routine Name: IBCERP7
     Before: B33534777   After: B40055095  **577,592,623**
 Routine Name: IBCESRV
-    Before: B69744017   After: B72128714  **137,181,196,232,296,320,407,623**
+    Before: B69744017   After: B71687947  **137,181,196,232,296,320,407,623**
 Routine Name: IBCEST
     Before: B99553380   After:B134393645  **137,189,197,135,283,320,368,
                                            397,407,577,592,623**
@@ -702,6 +579,8 @@ Routine Name: IBCEU7
     Before: B36671868   After: B38663293  **432,592,623**
 Routine Name: IBCEXTRP
     Before: B50603879   After: B53771713  **137,197,211,348,349,377,592,623**
+Routine Name: IBCF23A
+    Before: B52551501   After: B52870803  **51,432,516,547,577,592,608,623**
 Routine Name: IBCSC6
     Before: B15100068   After: B15643849  **52,80,109,106,51,137,343,400,
                                            432,623**
@@ -723,8 +602,10 @@ Routine Name: IBJPS2
     Before: B59492878   After: B62122372  **39,52,115,143,51,137,161,155,
                                            320,348,349,377,384,400,432,
                                            494,461,516,547,592,608,623**
+Routine Name: IBTASHLT
+    Before:       n/a   After:   B716320  **623**
 Routine Name: IBY623PO
-    Before:       n/a   After:  B5139306  **623**
+    Before:       n/a   After: B20146754  **623**
 Routine Name: IBY623PR
     Before:       n/a   After:  B3335042  **623**
  
